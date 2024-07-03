@@ -1,0 +1,28 @@
+module.exports = {
+    apps : [
+    {%- for item in items %}
+        {
+            name: "{{item.ins_name}}",
+            script: "./main.js",
+            watch: false,
+            env_prod: {
+                "PORT": {{item.port}},
+                "NODE_ENV": "prod",
+                "HOST": "{{server_ip}}",
+                "INS_NAME": "{{item.ins_name}}",
+                "USER_DIR": "temp/{{item.ins_name}}"
+            }
+        },
+    {%- endfor %}
+        {
+            name: "ins001",
+            script: "./main.js",
+            watch: false,
+            env_prod: {
+                "PORT": 3001,
+                "NODE_ENV": "prod",
+                "USER_DIR": "temp/userData2"
+            }
+        },
+    ]
+}
