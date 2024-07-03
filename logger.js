@@ -59,12 +59,15 @@ module.exports = {
         return defaultLogger.info.call(defaultLogger, ...arguments)
     },
     warn() {
-        return errorLogger.warn.call(errorLogger, ...arguments)
+        errorLogger.warn.call(errorLogger, ...arguments)
+        return defaultLogger.warn.call(defaultLogger, ...arguments)
     },
     error() {
-        return errorLogger.error.call(errorLogger, ...arguments)
+        errorLogger.error.call(errorLogger, ...arguments)
+        return defaultLogger.error.call(defaultLogger, ...arguments)
     },
     fatal() {
-        return errorLogger.fatal.call(errorLogger, ...arguments)
+        errorLogger.fatal.call(errorLogger, ...arguments)
+        return defaultLogger.fatal.call(defaultLogger, ...arguments)
     }
 }
