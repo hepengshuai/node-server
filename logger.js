@@ -19,6 +19,12 @@ log4js.configure({
             filename: `${__dirname}/logs/${process.env.INS_NAME || 'default'}-error`,
             pattern: 'yyyy-MM-dd.log',
             alwaysIncludePattern: true
+        },
+        debug: {
+            type: 'file',
+            filename: `${__dirname}/logs/${process.env.INS_NAME || 'default'}-debug`,
+            pattern: 'yyyy-MM-dd.log',
+            alwaysIncludePattern: true
         }
     },
     categories: {
@@ -29,18 +35,24 @@ log4js.configure({
         error: {
             appenders: ['consoleOut', 'error'],
             level: 'warn'
+        },
+        debug: {
+            appenders: ['debug'],
+            level: 'debug'
         }
     }
 });
 
 const defaultLogger = log4js.getLogger('default');
 const errorLogger = log4js.getLogger('error');
+const debugLogger = log4js.getLogger('debug');
 
 module.exports = {
     trace() {
         return defaultLogger.trace.call(defaultLogger, ...arguments)
     },
     debug() {
+        debugLogger.debug.call(debugLogger, ...arguments)
         return defaultLogger.debug.call(defaultLogger, ...arguments)
     },
     info() {
